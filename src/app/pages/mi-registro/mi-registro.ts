@@ -205,4 +205,9 @@ export class MiRegistro implements OnInit {
       rating: tmdbItem.vote_average ?? null
     };
   }
+
+  onVistaLista(): void {
+  this.modoVista = 'lista';
+  this.loadRegistroEnriquecido(); // 🔄 recarga BD + TMDB
+}
 }

@@ -1,18 +1,21 @@
-<div
-  class="card h-100 shadow-sm cursor-pointer">
+<div class="card h-100 shadow-sm">
 
-  <!-- IMAGEN -->
+  <!-- IMAGEN → navega -->
   <img
-    class="card-img-top"
+    class="card-img-top cursor-pointer"
     [src]="imageUrl"
     [alt]="title"
-    
+    (click)="navigate()"
   />
 
   <div class="card-body">
 
-    <!-- TÍTULO -->
-    <h6 class="card-title mb-1">{{ title }}</h6>
+    <!-- TÍTULO → navega -->
+    <h6
+      class="card-title mb-1 cursor-pointer"
+      (click)="navigate()">
+      {{ title }}
+    </h6>
 
     <!-- TIPO -->
     <span
@@ -20,18 +23,21 @@
       [ngClass]="{
         'bg-primary': type === 'Película',
         'bg-success': type === 'Serie'
-      }">{{ type }}</span>
+      }">
+      {{ type }}
+    </span>
 
     <!-- FECHA -->
     <p class="text-muted mb-0">{{ date }}</p>
-        
 
+    <!-- ADDLIST → NO navega, eventos limpios -->
     @if (isLogged()) {
-  <app-addlist
-    [tmdbId]="item.id"
-    [esPelicula]="item.media_type !== 'tv' && !item.first_air_date">
-  </app-addlist>
+  <div class="mt-2">
+    <app-addlist
+      [tmdbId]="tmdbId"
+      [esPelicula]="esPelicula">
+    </app-addlist>
+  </div>
 }
   </div>
-
 </div>

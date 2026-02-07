@@ -2,15 +2,21 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Addlist } from '../addlist/addlist';
 import { UserDataService } from '../../services/user-data';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, Addlist],
+  imports: [CommonModule, Addlist, RouterModule],
   templateUrl: './card.html',
   styleUrl: './card.css',
 })
 export class Card {
+  constructor(private router: Router) {}
+
+  navigate(): void {
+    this.router.navigate(this.route);
+  }
 
   private userData = inject(UserDataService);
 
@@ -61,11 +67,14 @@ export class Card {
   // ES PELÍCULA (boolean REAL)
   // ==============================
   get esPelicula(): boolean {
-    return !(
-      this.item?.media_type === 'tv' ||
-      this.item?.first_air_date
-    );
+  // Si viene media_type (trending)
+  if (this.item.media_type) {
+    return this.item.media_type === 'movie';
   }
+
+  // Fallback robusto
+  return !this.item.first_air_date;
+}
 
   // ==============================
   // POSTER
@@ -82,4 +91,11 @@ export class Card {
   isLogged(): boolean {
     return this.userData.isLogged();
   }
+
+get tmdbId(): number {
+  return this.item.id;
+}
+
+
+
 }
