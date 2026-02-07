@@ -1,1 +1,33 @@
-<p>home works!</p>
+<div class="container p-3">
+  <h1>Tendencias</h1>
+
+  <div class="d-inline-flex border rounded-pill p-1 mb-3 trend-switch">
+  <ul class="nav nav-pills gap-1">
+
+    <li class="nav-item">
+      <button
+        class="nav-link rounded-pill px-4 fw-semibold"
+        [class.active]="btnActive === 'day'"
+        (click)="cargarHoy()">
+        <span>Hoy</span>
+      </button>
+    </li>
+
+    <li class="nav-item">
+      <button
+        class="nav-link rounded-pill px-4 fw-semibold"
+        [class.active]="btnActive === 'week'"
+        (click)="cargarSemana()">
+        <span>Esta semana</span>
+      </button>
+    </li>
+
+  </ul>
+</div>
+
+  @if (loading) {
+    <div class="text-center">Cargando...</div>
+  } @else {
+    <app-list-card [items]="items"></app-list-card>
+  }
+</div>

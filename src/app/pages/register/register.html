@@ -1,0 +1,114 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-4">
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+
+          <h1 class="h4 text-center mb-4">Nueva cuenta</h1>
+
+          <!-- Mostrar mensaje de error si existe -->
+          @if (error) {
+            <div class="alert alert-danger" role="alert">
+              {{ error }}
+            </div>
+          }
+
+          <!-- Mostrar mensaje de éxito si el registro fue exitoso -->
+          @if (success) {
+            <div class="alert alert-success" role="alert">
+              ¡Registro exitoso! Redirigiendo al login...
+            </div>
+          }
+
+          <!-- Mostrar el formulario si no fue exitoso el registro -->
+          @if (!success) {
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+              <!-- Campo Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="tu@email.com"
+                />
+                <!-- Mostrar error si el email es inválido y fue tocado -->
+                @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                  <small class="text-danger">
+                    Introduce un email válido
+                  </small>
+                }
+              </div>
+
+              <!-- Campo Contraseña -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control"
+                  formControlName="password"
+                  placeholder="Mínimo 6 caracteres"
+                />
+                <!-- Mostrar error si la contraseña es inválida y fue tocada -->
+                @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                  <small class="text-danger">
+                    Contraseña mínimo 6 caracteres
+                  </small>
+                }
+              </div>
+
+              <!-- Campo Confirmar Contraseña -->
+              <div class="mb-4">
+                <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  class="form-control"
+                  formControlName="confirmPassword"
+                  placeholder="Repite tu contraseña"
+                />
+                <!-- Mostrar error si las contraseñas no coinciden -->
+                @if (registerForm.get('confirmPassword')?.touched && !passwordsMatch()) {
+                  <small class="text-danger">
+                    Las contraseñas no coinciden
+                  </small>
+                }
+              </div>
+
+              <!-- Botón Registrarse -->
+              <div class="d-grid mb-3">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary"
+                  [disabled]="loading || registerForm.invalid"
+                >
+                  @if (!loading) {
+                    <span>Registrarse</span>
+                  } @else {
+                    <span>
+                      <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                      Registrando...
+                    </span>
+                  }
+                </button>
+              </div>
+
+              <!-- Link a Login -->
+              <div class="text-center">
+                <span class="text-muted">¿Ya tienes cuenta?</span>
+                <a routerLink="/login" class="ms-1">Inicia sesión</a>
+              </div>
+
+            </form>
+          }
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

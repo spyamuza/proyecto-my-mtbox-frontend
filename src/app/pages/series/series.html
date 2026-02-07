@@ -1,1 +1,66 @@
-<p>series works!</p>
+<!-- SELECT FILTRO -->
+<select
+  class="form-select me-4 ms-4 mb-3"
+  style="max-width: 400px;"
+  [(ngModel)]="filter"
+  (change)="onFilterChange()">
+  <option value="popular">Populares</option>
+  <option value="on_the_air">En emisión</option>
+  <option value="airing_today">Hoy en TV</option>
+  <option value="top_rated">Mejor valoradas</option>
+</select>
+
+<!-- BUSCADOR -->
+<div class="me-4 ms-4 mb-3" style="max-width: 400px;">
+  <div class="input-group">
+    <span class="input-group-text">
+      <!-- icono search -->
+      🔍
+    </span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar serie por nombre…"
+      [(ngModel)]="searchTerm"
+      (input)="onSearchChange()"
+    />
+  </div>
+</div>
+
+
+
+<!-- LISTADO DE SERIES -->
+
+<div class="container p-3">
+    <h1>Series</h1>
+
+    @if (loading) {
+
+        
+        <p class="text-center text-muted">Cargando...</p>
+
+
+    }@else{
+
+
+        <!--listado de series-->
+        <app-list-card [items]="items"></app-list-card>
+        <!--botones de paginación-->
+        <div class="d-flex justify-content-center m-5">
+          <button class="btn btn-outline-primary " (click)="prevPage()">
+            Anterior
+          </button>
+          
+                <span class="fw-semibold me-3 ms-3">
+                    Página {{ page }} de {{ totalPages }}
+                </span>
+
+
+          <button class="btn btn-outline-primary" (click)="nextPage()">
+            Siguiente
+          </button>
+        </div>
+
+
+    }       
+</div>

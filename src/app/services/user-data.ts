@@ -8,6 +8,9 @@ export class UserDataService {
   private user: any = null;
   private token: string | null = null;
 
+  constructor() {
+  }
+
   setUser(user: any, token: string): void {
     this.user = user;
     this.token = token;
@@ -25,7 +28,7 @@ export class UserDataService {
     return this.token !== null;
   }
   
-//borrar sesión
+  //borrar sesión
   logout(): void {
     this.user = null;
     this.token = null;

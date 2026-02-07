@@ -1,0 +1,122 @@
+
+<!--fondo de la imagen-->
+
+<div class="container py-4">
+
+   <button
+    class="btn btn-outline-secondary btn-sm mb-3"
+    (click)="volver()">
+    ← Volver
+  </button>
+
+  @if (loading) {
+    <p class="text-center text-muted">Cargando ficha…</p>
+  } @else {
+
+    <div class="row mb-4">
+
+      <div class="col-12 col-md-4 mb-3">
+        <img
+          class="img-fluid rounded shadow-sm"
+          [src]="pelicula.poster_path
+            ? 'https://image.tmdb.org/t/p/w500' + pelicula.poster_path
+            : 'https://via.placeholder.com/500x750?text=Sin+imagen'"
+          [alt]="pelicula.title || pelicula.name"
+        />
+      </div>
+
+      <div class="col-12 col-md-8">
+
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h1 class="mb-0">
+            {{ pelicula.title || pelicula.name }}
+            <small class="text-muted">
+              ({{ (pelicula.release_date || pelicula.first_air_date) | slice:0:4 }})
+            </small>
+          </h1>
+
+         
+        </div>
+
+        @if (pelicula.number_of_seasons) {
+            <p class="text-muted mb-2">
+              <strong>Temporadas:</strong> {{ pelicula.number_of_seasons }} ·
+              <strong>Episodios:</strong> {{ pelicula.number_of_episodes }}
+            </p>
+          }
+          
+        <div class="mb-3">
+          @for (genre of pelicula.genres; track genre.id) {
+            <span class="badge bg-secondary me-1">{{ genre.name }}</span>
+          }
+        </div>
+
+        <p>{{ pelicula.overview }}</p>
+
+        @if (director) {
+          <p>
+            <strong>{{ pelicula.title ? 'Director:' : 'Creador:' }}</strong>
+            {{ director }}
+          </p>
+        }
+        
+         @if (userData.isLogged()) {
+            <app-addlist
+              [tmdbId]="pelicula.id"
+              [esPelicula]="type === 'movie'">
+            </app-addlist>
+          }
+          
+       
+         
+
+        
+      </div>
+    </div>
+
+   <!-- PLATAFORMAS -->
+      <div class="mb-5">
+        <h4 class="mb-2">Disponible en</h4>
+
+        @if (plataformas.length > 0) {
+          <div class="d-flex flex-wrap gap-2">
+            @for (p of plataformas; track p.provider_id) {
+              <span class="badge bg-primary">
+                {{ p.provider_name }}
+              </span>
+            }
+          </div>
+        } @else {
+          <span class="badge bg-secondary">
+            No hay información disponible
+          </span>
+        }
+      </div>
+
+    @if (reparto.length > 0) {
+      <div>
+        <h3 class="mb-3">Reparto</h3>
+
+        <div class="row g-3">
+          @for (actor of reparto; track actor.id) {
+            <div class="col-6 col-md-3 col-lg-2 text-center">
+              <img
+                class="img-fluid rounded mb-2"
+                [src]="actor.profile_path
+                  ? 'https://image.tmdb.org/t/p/w185' + actor.profile_path
+                  : 'https://via.placeholder.com/185x278?text=No+Image'"
+                [alt]="actor.name"
+              />
+              <div class="small">
+                <strong>{{ actor.name }}</strong><br />
+                <span class="text-muted">{{ actor.character }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+  }
+
+</div>

@@ -1,1 +1,67 @@
-<p>peliculas works!</p>
+<select
+  class="form-select me-4 ms-4 mb-3"
+  style="max-width: 400px;"
+  [(ngModel)]="filter"
+  (change)="onFilterChange()">
+  
+  <option value="popular">Populares</option>
+  <option value="now_playing">En cartelera</option>
+  <option value="upcoming">Próximamente</option>
+  <option value="top_rated">Mejor puntuadas</option>
+</select>
+
+<div class="me-4 ms-4 mb-3"
+     style="max-width: 400px;">
+  <div class="input-group">
+    <span class="input-group-text">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="16"
+           height="16"
+           fill="currentColor"
+           class="bi bi-search"
+           viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+      </svg>
+    </span>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar película por nombre…"
+      [(ngModel)]="searchTerm"
+      (input)="onSearchChange()"
+    />
+  </div>
+</div>
+
+
+
+<!-- LISTADO DE PELICULAS -->
+<div class="container p-3">
+  <h1>Películas</h1>
+
+  @if (loading) {
+    <p class="text-center text-muted">Cargando...</p>
+  }@else{
+        <!--listado de peliculas-->
+        <app-list-card [items]="items"></app-list-card>
+
+        <!--botones de paginación-->
+        <div class="d-flex justify-content-center m-5">
+          <button class="btn btn-outline-primary " (click)="prevPage()">
+            Anterior
+          </button>
+          
+                <span class="fw-semibold me-3 ms-3">
+                    Página {{ page }} de {{ totalPages }}
+                </span>
+
+
+          <button class="btn btn-outline-primary" (click)="nextPage()">
+            Siguiente
+          </button>
+        </div>
+
+    }
+
+  </div>

@@ -1,0 +1,11 @@
+.layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CONTENIDO PRINCIPAL */
+.content {
+  flex: 1;
+  padding-top: 100px; /* ← espacio para el navbar */
+}

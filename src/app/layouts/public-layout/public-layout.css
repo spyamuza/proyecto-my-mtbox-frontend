@@ -1,0 +1,12 @@
+/* Layout base */
+.layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenido central */
+.content {
+  flex: 1;
+  padding-top: 90px; /* altura del navbar fixed */
+}

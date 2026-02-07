@@ -1,0 +1,84 @@
+/* =========================
+   LOGO TMDB
+   ========================= */
+.tmdb-logo {
+  height: auto;
+  display: flex;
+  flex-direction: column;   /* logo arriba, texto debajo */
+  align-items: flex-start;
+  gap: 2px;
+}
+
+/* Tamaño del SVG */
+.tmdb-logo svg {
+  height: 26px;             /* controla SOLO el tamaño del logo */
+  width: auto;
+  display: block;
+}
+
+/* Texto "Lite v0.1" con gradiente TMDB */
+.tmdb-logo span {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+
+  background: linear-gradient(
+    90deg,
+    #90cea1 0%,
+    #3cbec9 56%,
+    #00b3e5 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* =========================
+   NAVBAR GENERAL
+   ========================= */
+.tmdb-navbar {
+  background-color: #0d253f; /* azul oscuro TMDB */
+  border-bottom: none;
+}
+
+/* LINKS DEL NAV */
+.tmdb-navbar .nav-link {
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* HOVER / ACTIVO */
+.tmdb-navbar .nav-link:hover,
+.tmdb-navbar .nav-link.active {
+  color: #90cea1;
+}
+
+/* BOTÓN CERRAR SESIÓN */
+.tmdb-navbar .btn-link {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tmdb-navbar .btn-link:hover {
+  color: #90cea1;
+}
+.tmdb-logo .version {
+  display: inline-block;
+  font-size: 0.6em;
+  font-weight: 500;
+
+  background: linear-gradient(
+    90deg,
+    #90cea1 0%,
+    #3cbec9 56%,
+    #00b3e5 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

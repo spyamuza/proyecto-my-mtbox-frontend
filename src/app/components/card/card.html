@@ -1,0 +1,37 @@
+<div
+  class="card h-100 shadow-sm cursor-pointer">
+
+  <!-- IMAGEN -->
+  <img
+    class="card-img-top"
+    [src]="imageUrl"
+    [alt]="title"
+    
+  />
+
+  <div class="card-body">
+
+    <!-- TÍTULO -->
+    <h6 class="card-title mb-1">{{ title }}</h6>
+
+    <!-- TIPO -->
+    <span
+      class="badge mb-2"
+      [ngClass]="{
+        'bg-primary': type === 'Película',
+        'bg-success': type === 'Serie'
+      }">{{ type }}</span>
+
+    <!-- FECHA -->
+    <p class="text-muted mb-0">{{ date }}</p>
+        
+
+    @if (isLogged()) {
+  <app-addlist
+    [tmdbId]="item.id"
+    [esPelicula]="item.media_type !== 'tv' && !item.first_air_date">
+  </app-addlist>
+}
+  </div>
+
+</div>

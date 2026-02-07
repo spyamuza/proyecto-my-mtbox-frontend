@@ -1,0 +1,153 @@
+<!-- ================= TOOLBAR ================= -->
+<div class="container">
+
+  <div class="toolbar mb-4 mt-4 d-flex flex-wrap align-items-center gap-3">
+
+    <!-- FILTROS -->
+    <select
+      class="form-select"
+      style="max-width: 200px"
+      [(ngModel)]="listaFiltro"
+      (change)="applyFilters()">
+      <option value="todo">Todo</option>
+      <option value="favoritos">Favoritos</option>
+      <option value="vistas">Vistas</option>
+      <option value="pendientes">Pendientes</option>
+    </select>
+
+    <select
+      class="form-select"
+      style="max-width: 200px"
+      [(ngModel)]="tipoFiltro"
+      (change)="applyFilters()">
+      <option value="todo">Todo</option>
+      <option value="pelicula">Películas</option>
+      <option value="serie">Series</option>
+    </select>
+
+    <select
+      class="form-select"
+      style="max-width: 200px"
+      [(ngModel)]="ordenFiltro"
+      (change)="applyFilters()">
+      <option value="az">A–Z</option>
+      <option value="za">Z–A</option>
+      <option value="fechaAsc">Fecha ↑</option>
+      <option value="fechaDesc">Fecha ↓</option>
+    </select>
+
+    <!-- SEARCH -->
+    <div style="max-width: 300px;">
+      <div class="input-group">
+        <span class="input-group-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+        </span>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar por título…"
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange()" />
+      </div>
+    </div>
+
+    <!-- MODO VISTA (MISMO ESTILO QUE TENDENCIAS) -->
+    <div class="ms-auto me-2">
+      <div class="d-inline-flex border rounded-pill p-1 trend-switch">
+
+        <button
+          class="nav-link rounded-pill px-4 fw-semibold"
+          [class.active]="modoVista === 'lista'"
+          (click)="modoVista = 'lista'">
+          Lista
+        </button>
+
+        <button
+          class="nav-link rounded-pill px-4 fw-semibold"
+          [class.active]="modoVista === 'tarjetas'"
+          (click)="modoVista = 'tarjetas'">
+          Tarjetas
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= VACÍO ================= -->
+@if (filteredItems.length === 0) {
+  <div class="alert alert-secondary text-center">
+    No hay elementos que mostrar
+  </div>
+}
+
+<!-- ================= LISTA ================= -->
+@if (modoVista === 'lista' && filteredItems.length > 0) {
+  <div class="list-group">
+
+    @for (item of filteredItems; track item.tmdbId ?? $index) {
+    
+        <a
+        class="list-group-item list-group-item-action d-flex align-items-center gap-3 text-decoration-none"
+        [routerLink]="[
+          '/ficha',
+          item.esPelicula ? 'movie' : 'tv',
+          item.tmdbId
+        ]">
+
+          <!-- IMAGEN -->
+          <img
+            [src]="item.poster ?? 'assets/no-image.jpg'"
+            alt="poster"
+            width="60"
+            height="90"
+            style="object-fit: cover; border-radius: 4px;"
+          />
+
+          <!-- INFO -->
+          <div class="flex-grow-1">
+            <div class="fw-semibold">
+              {{ item.titulo || 'Sin título' }}
+            </div>
+
+            <div class="small text-muted">
+              {{ item.esPelicula ? 'Película' : 'Serie' }}
+              ·
+              {{ item.fecha || 'Fecha desconocida' }}
+            </div>
+          </div>
+
+          <!-- ESTADOS -->
+          <div class="d-flex gap-2 flex-wrap">
+            @if (item.favorito) {
+              <span class="badge bg-danger">Favorito</span>
+            }
+            @if (item.vista === true) {
+              <span class="badge bg-success">Vista</span>
+            }
+            @if (item.vista === false) {
+              <span class="badge bg-warning text-dark">Pendiente</span>
+            }
+          </div>
+
+        </a>
+    }
+
+  </div>
+}
+
+<!-- ================= TARJETAS ================= -->
+@if (modoVista === 'tarjetas') {
+  <div class="row g-3">
+    @for (item of filteredItems; track item.tmdbId ?? $index) {
+      <div class="col-6 col-md-4 col-lg-3">
+        <app-card-list [item]="item"></app-card-list>
+      </div>
+    }
+  </div>
+}

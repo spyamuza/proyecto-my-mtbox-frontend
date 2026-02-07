@@ -1,0 +1,58 @@
+<div
+  class="card h-100 shadow-sm cursor-pointer text-dark"
+  (click)="navigate()">
+
+  <img
+    class="card-img-top"
+    [src]="image"
+    [alt]="item.titulo"
+  />
+
+  <div class="card-body">
+
+    <h6 class="card-title mb-1">
+      {{ item.titulo }}
+    </h6>
+
+    <span
+      class="badge mb-2"
+      [ngClass]="{
+        'bg-primary': item.esPelicula,
+        'bg-success': !item.esPelicula
+      }">
+      {{ typeLabel }}
+    </span>
+
+    <p class="text-muted mb-2">
+      {{ date }}
+    </p>
+
+    <div class="d-flex gap-1 flex-wrap">
+      @if (item.favorito) {
+        <span class="badge bg-danger">Favorito</span>
+      }
+      @if (item.vista === true) {
+        <span class="badge bg-success">Vista</span>
+      }
+      @if (item.vista === false) {
+        <span class="badge bg-warning text-dark">Pendiente</span>
+      }
+    </div>
+
+    @if (isLogged()) {
+      <!-- 🔴 ZONA QUE NO NAVEGA -->
+      <div
+        class="mt-2"
+        (click)="$event.stopPropagation()"
+        (mousedown)="$event.stopPropagation()">
+
+        <app-addlist
+          [tmdbId]="item.tmdbId"
+          [esPelicula]="item.esPelicula">
+        </app-addlist>
+
+      </div>
+    }
+
+  </div>
+</div>

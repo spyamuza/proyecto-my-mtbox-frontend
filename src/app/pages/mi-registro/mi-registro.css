@@ -1,3 +1,4 @@
+/* Estilos para Mi Registro */
 /* CONTENEDOR */
 .trend-switch {
   border-color: #032541; /* azul TMDB */
@@ -13,17 +14,4 @@
 .trend-switch .nav-link.active {
   background-color: #032541 !important;
   color: #ffffff !important;
-}
-
-/* TEXTO CON GRADIENTE TMDB (solo texto) */
-span {
-  background: linear-gradient(
-    90deg,
-    #90cea1 0%,
-    #3cbec9 56%,
-    #00b3e5 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
