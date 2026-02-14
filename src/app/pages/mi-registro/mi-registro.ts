@@ -90,7 +90,7 @@ export class MiRegistro implements OnInit {
   // ==============================
   applyFilters(): void {
 
-    // 🔴 CLAVE: partir de búsqueda si existe
+    //  CLAVE: partir de búsqueda si existe
     let items = this.isSearching
       ? [...this.filteredItems]
       : [...this.allItems];
@@ -153,7 +153,7 @@ export class MiRegistro implements OnInit {
             return of(null);
           }
 
-          // ✅ RESPETAR LO QUE DICE LA BD
+          // RESPETAR LO QUE DICE LA BD
           if (item.esPelicula === true) {
             return this.tmdb.getMovieById(item.tmdbId).pipe(
               map(tmdb => this.mergeItem(item, tmdb, true)),
@@ -161,7 +161,7 @@ export class MiRegistro implements OnInit {
             );
           }
 
-          // ✅ SERIE
+          //  SERIE
           return this.tmdb.getTvShowById(item.tmdbId).pipe(
             map(tmdb => this.mergeItem(item, tmdb, false)),
             catchError(() => of(null))

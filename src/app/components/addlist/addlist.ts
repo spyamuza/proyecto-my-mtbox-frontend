@@ -25,7 +25,7 @@ export class Addlist implements OnChanges {
 
   @Input() tmdbId!: number;
 
-  // 🔴 OJO: esto DEBE venir del padre
+  
   @Input() esPelicula!: boolean;
 
   favorite = false;
@@ -44,7 +44,7 @@ export class Addlist implements OnChanges {
 
     if (typeof this.esPelicula !== 'boolean') {
       console.error(
-        '❌ AddList: esPelicula NO definido. Revisa el HTML padre.',
+        ' AddList: esPelicula NO definido. Revisa el HTML padre.',
         { tmdbId: this.tmdbId, esPelicula: this.esPelicula }
       );
       return;
@@ -58,7 +58,7 @@ export class Addlist implements OnChanges {
   // -----------------------------
   cargarEstado(): void {
 
-    console.log('🟡 cargarEstado()', {
+    console.log(' cargarEstado()', {
       tmdbId: this.tmdbId,
       esPelicula: this.esPelicula
     });
@@ -90,7 +90,7 @@ export class Addlist implements OnChanges {
         this.cdr.detectChanges();
       },
       error: err => {
-        console.error('❌ Error cargando estado', err);
+        console.error('Error cargando estado', err);
       }
     });
   }
@@ -102,7 +102,7 @@ export class Addlist implements OnChanges {
 
   if (typeof this.esPelicula !== 'boolean') {
     console.error(
-      '⛔ NO se guarda: esPelicula inválido',
+      ' NO se guarda: esPelicula inválido',
       { tmdbId: this.tmdbId, esPelicula: this.esPelicula }
     );
     return;
@@ -116,7 +116,7 @@ export class Addlist implements OnChanges {
   const payload = {
     tmdbId: this.tmdbId,
 
-    // ✅ CONVERSIÓN EXPLÍCITA (CLAVE)
+    // CONVERSIÓN EXPLÍCITA 
     esPelicula: this.esPelicula === true ? 1 : 0,
 
     favorito: this.favorite ? 1 : 0,
@@ -124,10 +124,10 @@ export class Addlist implements OnChanges {
     notaUsuario: this.notaUsuario
   };
 
-  console.log('📤 Payload enviado:', payload);
+  console.log(' Payload enviado:', payload);
 
   this.api.createContenido(payload).subscribe({
-    error: err => console.error('❌ Error guardando contenido', err)
+    error: err => console.error(' Error guardando contenido', err)
   });
 }
 

@@ -27,3 +27,26 @@ span {
   background-clip: text;
   color: transparent;
 }
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+
+  scroll-behavior: smooth;
+}
+
+/* Scroll bonito (opcional) */
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background-color: #032541; /* azul TMDB */
+  border-radius: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
