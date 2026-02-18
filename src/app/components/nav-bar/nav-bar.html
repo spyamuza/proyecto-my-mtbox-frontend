@@ -1,45 +1,73 @@
-<nav class="navbar navbar-expand fixed-top tmdb-navbar">
-  <ul class="nav nav-underline align-items-center w-100 px-4">
+<nav class="navbar navbar-expand-lg fixed-top tmdb-navbar">
+  <div class="container-fluid px-4">
 
+    <!-- LOGO (igual que antes) -->
     <div class="tmdb-logo d-flex flex-column align-items-start me-4">
-      
-    <!-- LOGO TMDB -->
-   <div class="tmdb-logo">
-  <span class="tmdb-lite-text">
-    My MTvBox <small class="version">v0.1.0-beta</small>
-  </span>
-</div>
-       
+      <div class="tmdb-logo">
+        <span class="tmdb-lite-text">
+          My MTvBox <small class="version">v0.1.0-beta</small>
+        </span>
+      </div>
+    </div>
+
+    <!-- BOTÓN HAMBURGUESA (SVG Bootstrap) -->
+    <button
+      class="navbar-toggler border-0 text-white"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+
+      <!-- SVG Bootstrap icon -->
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="28"
+           height="28"
+           fill="#ffffff"
+           class="bi bi-list"
+           viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
+
+    <!-- CONTENIDO COLAPSABLE -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="nav nav-underline flex-column flex-lg-row align-items-lg-center w-100 gap-2 gap-lg-0">
+
+        <!-- LINKS -->
+        <li class="nav-item">
+          <a routerLink="/home" class="nav-link">Inicio</a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/peliculas" class="nav-link">Películas</a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/series" class="nav-link">Series</a>
+        </li>
+
+        @if (!isLogged()) {
+          <li class="nav-item ms-lg-auto">
+            <a routerLink="/login" class="nav-link">Iniciar sesión</a>
+          </li>
+        }
+
+        @if (isLogged()) {
+          <li class="nav-item ms-lg-auto">
+            <a routerLink="/app/mi-registro" class="nav-link">Mi registro</a>
+          </li>
+          <li class="nav-item">
+            <button (click)="logout()" class="nav-link btn btn-link">
+              Cerrar sesión
+            </button>
+          </li>
+        }
+
+      </ul>
+    </div>
 
   </div>
-    <!-- LINKS -->
-    <li class="nav-item">
-      <a routerLink="/home" class="nav-link">Inicio</a>
-    </li>
-
-    <li class="nav-item">
-      <a routerLink="/peliculas" class="nav-link">Películas</a>
-    </li>
-
-    <li class="nav-item">
-      <a routerLink="/series" class="nav-link">Series</a>
-    </li>
-
-    @if (!isLogged()) {
-      <li class="nav-item ms-auto">
-        <a routerLink="/login" class="nav-link">Iniciar sesión</a>
-      </li>
-    }
-
-    @if (isLogged()) { 
-      <li class="nav-item ms-auto">
-        <a routerLink="/app/mi-registro" class="nav-link">Mi registro</a>
-      </li>
-      <li class="nav-item">
-        <button (click)="logout()" class="nav-link btn btn-link">
-          Cerrar sesión
-        </button>
-      </li>
-    }
-  </ul>
 </nav>

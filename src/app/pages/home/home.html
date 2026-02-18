@@ -1,4 +1,4 @@
-<div class="container p-5">
+<div class="container pt-5">
   <!--
     ANOTACIONES PARA UNA VERSION CON INFORMACION DE LA APLICACION
   <p>Con <strong>MY MTbox</strong> mantente al día con las tendencias globales y toma el control total de lo que ves, sólo tú 
@@ -37,9 +37,12 @@
   </ul>
 </div>
 
+ 
   @if (loading) {
     <div class="text-center">Cargando...</div>
   } @else {
+    <div class="row g-3">
     <app-list-card [items]="items"></app-list-card>
+    </div>
   }
 </div>
